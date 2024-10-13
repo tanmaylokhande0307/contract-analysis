@@ -4,19 +4,13 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
+import { UserButton } from "./shared/user-button";
 
 const navItems: { name: string; href: string }[] = [
   { name: "DashBoard", href: "/dashboard" },
   { name: "Pricing", href: "/pricing" },
   { name: "Privacy Policy", href: "/privcy" },
 ];
-
-const googleSignIn = (): Promise<void> => {
-  return new Promise((resolve) => {
-    window.location.href = "http://localhost:8080/auth/google";
-    resolve();
-  });
-};
 
 export const Header = () => {
   const pathname = usePathname();
@@ -47,12 +41,7 @@ export const Header = () => {
             ))}
           </nav>
         </div>
-
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none space-x-2 hidden md:flex">
-            <Button onClick={googleSignIn}>Get Started</Button>
-          </div>
-        </div>
+        <UserButton />
       </div>
     </header>
   );
