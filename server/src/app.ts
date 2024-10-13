@@ -12,3 +12,11 @@ app.use(cors())
 app.use(morgan("dev"))
 app.use(helmet())
 app.use(express.json())
+
+mongoose.connect(process.env.MONGODB_URI!).then(()=> console.log("connected to database"))
+
+const PORT = 8080;
+
+app.listen(PORT,()=>{
+    console.log("Server started on port ",PORT)
+})
