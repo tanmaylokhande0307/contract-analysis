@@ -12,9 +12,13 @@ import "./config/passport";
 
 import authRoutes from "./routes/auth";
 
-
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json());
@@ -29,8 +33,8 @@ app.use(
     }),
     cookie: {
       secure: process.env.NODE_ENV === "production",
-      sameSite:process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 24 * 60 * 60 * 1000
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000,
     },
   })
 );

@@ -30,7 +30,12 @@ passport.use(
 );
 
 passport.serializeUser((user: any, done) => {
-  done(null, user._id);
+  done(null, {
+    id: user._id,
+    email: user.email,
+    name: user.displayName,
+    profilePicture: user.profilePicture,
+  });
 });
 
 passport.deserializeUser(async (id: string, done) => {

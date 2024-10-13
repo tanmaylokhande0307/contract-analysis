@@ -8,6 +8,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Link from "next/link";
 
 const googleSignIn = (): Promise<void> => {
   return new Promise((resolve) => {
@@ -18,6 +20,7 @@ const googleSignIn = (): Promise<void> => {
 
 export const UserButton = () => {
   const { user } = useCurrentUser();
+  console.log(user?.passport);
 
   return (
     <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
@@ -25,11 +28,41 @@ export const UserButton = () => {
         <>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant={"ghost"}
-                className="size-8 rounded-full"
-              ></Button>
+              <Button variant={"ghost"} className="size-8 rounded-full">
+                <Avatar className="size-8 ">
+                  <AvatarImage
+                    src={user?.passport?.user?.profilePicture || ""}
+                  />
+                  <AvatarFallback>
+                    {user?.passport?.user?.name?.charAt(0) || ""}
+                  </AvatarFallback>
+                </Avatar>
+              </Button>
             </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuItem className="flex flex-col items-start">
+                <div className="text-sm font-medium">
+                  {user?.passport?.user?.name || ""}
+                </div>
+                <div className="text-sm font-medium">
+                  {user?.passport?.user?.email || ""}
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href={"/dashboard"}>
+                  <span>Dashboard</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={"/dashboard/settings"}>
+                  <span>Settings</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <span>Logout</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
           </DropdownMenu>
         </>
       ) : (
