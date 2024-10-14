@@ -29,7 +29,7 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "pdfjs-dist": "^4.7.76",
+    "pdfjs-dist": "^3.11.174",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },

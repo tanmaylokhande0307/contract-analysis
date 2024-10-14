@@ -2,6 +2,7 @@ import { getDocument } from "pdfjs-dist";
 import redis from "../config/redis";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+
 const AI_MODEL = "gemini-pro";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const aiModel = genAI.getGenerativeModel({ model: AI_MODEL });

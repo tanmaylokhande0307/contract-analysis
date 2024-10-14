@@ -11,6 +11,7 @@ import MongoStore from "connect-mongo";
 import "./config/passport";
 
 import authRoutes from "./routes/auth";
+import contractRoutes from "./routes/contracts";
 
 const app = express();
 app.use(
@@ -47,6 +48,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoutes);
+app.use("/contracts", contractRoutes);
 
 const PORT = 8080;
 app.listen(PORT, () => {
