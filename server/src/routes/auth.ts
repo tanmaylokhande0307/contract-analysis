@@ -29,7 +29,7 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect(`${process.env.CLIENT_URL}`);
+    res.status(200).json({ status: "ok" });
   });
 });
 

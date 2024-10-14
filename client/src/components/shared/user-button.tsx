@@ -11,6 +11,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
 import { Icons } from "./icons";
+import { logout } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const googleSignIn = (): Promise<void> => {
   return new Promise((resolve) => {
@@ -21,7 +23,13 @@ const googleSignIn = (): Promise<void> => {
 
 export const UserButton = () => {
   const { user } = useCurrentUser();
-  console.log(user?.passport);
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
+  
 
   return (
     <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
@@ -62,7 +70,7 @@ export const UserButton = () => {
                   <span>Settings</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>
                 <Icons.logout className="mr-2 size-4" />
                 <span>Logout</span>
               </DropdownMenuItem>
