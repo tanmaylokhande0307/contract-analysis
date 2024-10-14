@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
+import { Icons } from "./icons";
 
 const googleSignIn = (): Promise<void> => {
   return new Promise((resolve) => {
@@ -51,15 +52,18 @@ export const UserButton = () => {
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link href={"/dashboard"}>
+                  <Icons.dashboard className="mr-2 size-4" />
                   <span>Dashboard</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href={"/dashboard/settings"}>
+                  <Icons.settings className="mr-2 size-4" />
                   <span>Settings</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
+                <Icons.logout className="mr-2 size-4" />
                 <span>Logout</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
