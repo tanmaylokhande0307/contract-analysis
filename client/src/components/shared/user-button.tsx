@@ -53,7 +53,7 @@ export const UserButton = () => {
                 <div className="text-sm font-medium">
                   {user?.passport?.user?.name || ""}
                 </div>
-                <div className="text-sm font-medium">
+                <div className="text-muted-foreground font-medium">
                   {user?.passport?.user?.email || ""}
                 </div>
               </DropdownMenuItem>
