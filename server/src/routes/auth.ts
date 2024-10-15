@@ -18,7 +18,7 @@ router.get(
 
 router.get("/current-user", (req, res) => {
   if (req.isAuthenticated()) {
-    res.json(req.session);
+    res.json((req.session as any)?.passport?.user);
   } else {
     res.status(401).json({ error: "Unauthorized" });
   }

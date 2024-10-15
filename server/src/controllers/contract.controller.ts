@@ -79,19 +79,19 @@ export const analyzeContract = async (req: Request, res: Response) => {
       analysis = await analyzeContractWithAI(pdfText, "free", contractType);
     }
 
+    
     if (!analysis.summary || !analysis.risks || !analysis.opportunities) {
       throw new Error("Failed to analyze contract");
     }
 
     const savedAnalysis = await ContractAnalysisSchema.create({
-      userId: user._id,
+      userId: (user as any)._conditions._id.id,
       contractText: pdfText,
       contractType,
       ...(analysis as Partial<IContractAnalysis>),
       language: "en",
       aiModel: "gemini-pro",
     });
-
     res.json(savedAnalysis);
   } catch (error) {
     console.error(error);

@@ -40,10 +40,10 @@ export const UserButton = () => {
               <Button variant={"ghost"} className="size-8 rounded-full">
                 <Avatar className="size-8 ">
                   <AvatarImage
-                    src={user?.passport?.user?.profilePicture || ""}
+                    src={user?.profilePicture || ""}
                   />
                   <AvatarFallback>
-                    {user?.passport?.user?.name?.charAt(0) || ""}
+                    {user?.name?.charAt(0) || ""}
                   </AvatarFallback>
                 </Avatar>
               </Button>
@@ -51,10 +51,10 @@ export const UserButton = () => {
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuItem className="flex flex-col items-start">
                 <div className="text-sm font-medium">
-                  {user?.passport?.user?.name || ""}
+                  {user?.name || ""}
                 </div>
                 <div className="text-muted-foreground font-medium">
-                  {user?.passport?.user?.email || ""}
+                  {user?.email || ""}
                 </div>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
