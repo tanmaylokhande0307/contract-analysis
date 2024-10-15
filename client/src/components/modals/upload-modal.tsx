@@ -6,7 +6,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { api } from "@/lib/api";
 import { useContractStore } from "@/store/zustand";
 import { useMutation } from "@tanstack/react-query";
@@ -14,8 +13,9 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { AnimatePresence, motion } from "framer-motion";
 import { Brain, FileText, Loader2, Sparkles, Trash } from "lucide-react";
-import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { useRouter } from "next/navigation";
 
 interface IUploadModalProps {
@@ -24,18 +24,17 @@ interface IUploadModalProps {
   onUploadComplete: () => void;
 }
 
-export const UploadModal = ({
+export function UploadModal({
   isOpen,
   onClose,
   onUploadComplete,
-}: IUploadModalProps) => {
+}: IUploadModalProps) {
   const { setAnalysisResults } = useContractStore();
-
   const router = useRouter();
 
+  const [detectedType, setDetectedType] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [files, setFiles] = useState<File[]>([]);
-  const [detectedType, setDetectedType] = useState<string | null>(null);
   const [step, setStep] = useState<
     "upload" | "detecting" | "confirm" | "processing" | "done"
   >("upload");
@@ -86,6 +85,7 @@ export const UploadModal = ({
           "Content-Type": "multipart/form-data",
         },
       });
+
       console.log(response.data);
       return response.data;
     },
@@ -322,4 +322,4 @@ export const UploadModal = ({
       <DialogContent>{renderContent()}</DialogContent>
     </Dialog>
   );
-};
+}

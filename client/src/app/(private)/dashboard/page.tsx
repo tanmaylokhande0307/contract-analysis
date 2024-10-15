@@ -12,7 +12,7 @@ const Dashboard = () => {
       <UploadModal
         isOpen={isUploadModalOpen}
         onClose={() => setIsUploadModalOpen(false)}
-        onUploadComplete={() => setIsUploadModalOpen(false)}
+        onUploadComplete={() => setIsUploadModalOpen(true)}
       />
     </div>
   );
