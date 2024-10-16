@@ -11,6 +11,7 @@ import ContractAnalysisSchema, {
   IContractAnalysis,
 } from "../models/contract.model";
 import mongoose, { FilterQuery } from "mongoose";
+import { isValidMongoId } from "../utils/mongoUtils";
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -122,4 +123,28 @@ export const getUserContracts = async (req: Request, res: Response) => {
 export const getContractById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const user = req.user as IUser;
+
+  if (!isValidMongoId(id)) {
+    return res.status(400).json({ error: "Invalid contract ID" });
+  }
+
+  try {
+    const cachedContracts = await redis.get(`contract:${id}`);
+    if (cachedContracts) {
+      return res.json(cachedContracts);
+    }
+    const contract = await ContractAnalysisSchema.findOne({
+      _id: id,
+      userId: (user as any)._conditions._id.id,
+    });
+    if (!contract) {
+      return res.status(404).json({ error: "Contract not found" });
+    }
+    await redis.set(`contract:${id}`, contract, { ex: 3600 });
+
+    res.json(contract);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get contract" });
+  }
 };
