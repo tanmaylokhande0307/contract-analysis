@@ -13,23 +13,18 @@ import Link from "next/link";
 import { Icons } from "./icons";
 import { logout } from "@/lib/api";
 import { useRouter } from "next/navigation";
-
-const googleSignIn = (): Promise<void> => {
-  return new Promise((resolve) => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
-    resolve();
-  });
-};
+import { useModalStore } from "@/store/zustand";
 
 export const UserButton = () => {
-  const { user } = useCurrentUser();
-  const router = useRouter()
+  const { user, refetch } = useCurrentUser();
+  const { openModal } = useModalStore();
+  const router = useRouter();
 
   const handleLogout = async () => {
     await logout();
+    refetch();
     router.push("/");
   };
-  
 
   return (
     <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
@@ -39,20 +34,14 @@ export const UserButton = () => {
             <DropdownMenuTrigger asChild>
               <Button variant={"ghost"} className="size-8 rounded-full">
                 <Avatar className="size-8 ">
-                  <AvatarImage
-                    src={user?.profilePicture || ""}
-                  />
-                  <AvatarFallback>
-                    {user?.name?.charAt(0) || ""}
-                  </AvatarFallback>
+                  <AvatarImage src={user?.profilePicture || ""} />
+                  <AvatarFallback>{user?.name?.charAt(0) || ""}</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuItem className="flex flex-col items-start">
-                <div className="text-sm font-medium">
-                  {user?.name || ""}
-                </div>
+                <div className="text-sm font-medium">{user?.name || ""}</div>
                 <div className="text-muted-foreground font-medium">
                   {user?.email || ""}
                 </div>
@@ -79,7 +68,9 @@ export const UserButton = () => {
         </>
       ) : (
         <>
-          <Button onClick={googleSignIn}>Sign In</Button>
+          <Button onClick={() => openModal("connectAccountModal")}>
+            Sign In
+          </Button>
         </>
       )}
     </div>

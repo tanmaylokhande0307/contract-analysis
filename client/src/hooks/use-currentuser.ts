@@ -6,6 +6,7 @@ export const useCurrentUser = () => {
     isLoading,
     isError,
     data: user,
+    refetch
   } = useQuery({
     queryKey: ["currentUser"],
     queryFn: async () => {
@@ -24,5 +25,6 @@ export const useCurrentUser = () => {
     isLoading,
     isError,
     user,
+    refetch
   };
 };
