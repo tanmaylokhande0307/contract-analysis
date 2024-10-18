@@ -30,6 +30,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "pdfjs-dist": "^3.11.174",
+    "resend": "^4.0.0",
+    "stripe": "^17.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },
