@@ -39,6 +39,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
 };
 
 export const handleWebhook = async (req: Request, res: Response) => {
+  console.log("inside handle webhook")
   const sig = req.headers["stripe-signature"] as string;
 
   let event: Stripe.Event;
