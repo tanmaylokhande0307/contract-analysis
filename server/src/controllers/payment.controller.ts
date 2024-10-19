@@ -25,7 +25,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           quantity: 1,
         },
       ],
-      customer_email: user.email,
+      customer_email: (user as any)._conditions._id.email,
       mode: "payment",
       success_url: `${process.env.CLIENT_URL}/payment-success`,
       cancel_url: `${process.env.CLIENT_URL}/payment-cancel`,

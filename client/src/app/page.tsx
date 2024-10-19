@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
 import stripePromise from "@/lib/stripe";
