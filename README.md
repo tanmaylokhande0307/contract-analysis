@@ -9,3 +9,14 @@ Deriving insights from contracts take time. Use Contract analyser to use AI to d
 - Detailed contracts analysis page with charts for better understanding of the results
 - Upgrade to premium membership for better analysis
 
+### Technologies
+- FrontEnd: NextJS, Tailwind CSS, ShadCN,
+- Client State Management implementeed using Zustand
+- Server State Management implemented using React Query
+- Database: MongoDB
+- Backend: NodeJS, Express, Mongoose
+- GENAI: @google/generative-ai
+- LLM: gemini-pro
+- stripe for payment integration
+- resend for sending email regarding membership upgrade
+
