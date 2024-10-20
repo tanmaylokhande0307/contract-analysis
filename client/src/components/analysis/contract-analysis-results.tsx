@@ -29,9 +29,10 @@ const ContractAnalysisResults = ({
   onUpgrade,
 }: IContractAnalysisResultsProps) => {
   const [activeTab, setActiveTab] = useState("summary");
+  console.log(analysisResults)
 
   const getScore = () => {
-    const score = analysisResults.overallScore;
+    const score = analysisResults?.overallScore;
     if (score > 70)
       return { icon: ArrowUp, color: "text-green-500", text: "Good" };
     if (score < 50)
@@ -170,7 +171,7 @@ const ContractAnalysisResults = ({
             <div className="w-1/2">
               <div className="flex items-center space-x-4 mb-4">
                 <div className="text-4xl font-bold">
-                  {analysisResults.overallScore ?? 0}
+                  {analysisResults?.overallScore ?? 0}
                 </div>
                 <div className={`flex items-center ${scoreTrend.color}`}>
                   <scoreTrend.icon className="size-6 mr-1" />
@@ -180,11 +181,11 @@ const ContractAnalysisResults = ({
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Risk</span>
-                  <span>{100 - analysisResults.overallScore}%</span>
+                  <span>{100 - analysisResults?.overallScore}%</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Opportunities</span>
-                  <span>{analysisResults.overallScore}%</span>
+                  <span>{analysisResults?.overallScore}%</span>
                 </div>
               </div>
               <p className="text-sm text-gray-600 mt-4">
@@ -196,7 +197,7 @@ const ContractAnalysisResults = ({
             <div className="w-1/2  flex justify-center items-center">
               <div className="w-full h-full max-w-xs ">
                 <OverallScoreChart
-                  overallScore={analysisResults.overallScore}
+                  overallScore={analysisResults?.overallScore}
                 />
               </div>
             </div>
