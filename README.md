@@ -20,3 +20,8 @@ Deriving insights from contracts take time. Use Contract analyser to use AI to d
 - stripe for payment integration
 - resend for sending email regarding membership upgrade
 
+### Check out the demo video
+
+
+https://github.com/user-attachments/assets/78ab5356-8812-4246-a8c4-8398ec3b8955
+
